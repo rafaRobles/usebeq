@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>USEBEQ</title>
+	<meta charset="utf-8">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<script src="js/script.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+<nav id="nav">
+
+	<div class="nav-mini">
+		<h1>BUSCADOR DE ESCUELAS - USEBEQ</h1>
+		<div class="nav-cp">
+			
+			<!--<p>Filtros: </p>-->
+			<button id="btnShowFiltro" onclick="mostrarFiltro()"><img src="filtro.png"></button>
+			<button id="btnShowFiltro" onclick="filtrar('sinFiltros')">Sin filtros</button>
+
+		</div>	
+	</div>
+		
+	<div class="bienvenida">
+
+		<div class="radar1" id="r1"></div>
+		<div class="radar1" id="r2"></div>
+		<div class="radar1" id="r3"></div>
+
+		<div class="menu">
+			<h1>BUSCADOR DE ESCUELAS - USEBEQ</h1>
+		</div>
+
+		<h1>USEBEQ</h1>
+		<h2>¿Estás buscando <b>escuela</b>?</h2>
+		<p>Encuentra la mejor escuela para tus hijos utilizando<br> nuestra aplicación. Compara distintas escuelas y sus caracteristicas para tomar la mejor decisión.</p>
+		<input type="search" placeholder="Calle, colonia o C.P." id="cp" onfocus="geolocate()">
+		<button onclick="buscarCP()" id="bcp"><img src="arrow.png" class="invertir"></button>
+		<p id="mensaje"></p>
+	</div>
+</nav>
+
+	<div id="menuFiltro">
+
+		<div id="radioOpcion" class="classInputFiltros">
+			<h4>Radio de Muestra</h4>
+
+			<div class="divRango">
+				<p>Selecciona el radio en que se mostraran las escuelas de 3 a 10 kilometros</p>
+				<input type="range" id="rangoRadio" name="" min="3" max="10" list="rango" value="3" onchange="getValorRadio()">
+				<p id="pRadio">3</p>
+			</div>
+
+		</div>
+
+		<div id="ofertaListaExtra" class="classInputFiltros">
+			<h4>Actividades Extra Curriculares</h4>
+			<div class="filtrosIzq">
+
+				<input type="checkbox" name="extraCurr" value="Atletismo">Atletismo <img src="help.png" data-toggle="tooltip" title="Ateltismo"> <br>
+
+				<input type="checkbox" name="extraCurr" value="Basquetbol">Basquetbol <img src="help.png" data-toggle="tooltip" title="Basquetbol"><br>
+
+				<input type="checkbox" name="extraCurr" value="Fútbol">Fútbol   <img src="help.png" data-toggle="tooltip" title="Fútbol"><br>
+
+				<input type="checkbox" name="extraCurr" value="Voleibol">Voleibol   <img src="help.png" data-toggle="tooltip" title="Voleibol"><br>
+
+				<input type="checkbox" name="extraCurr" value="Bisutería">Bisutería  <img src="help.png" data-toggle="tooltip" title="Bisutería"><br>
+
+				<input type="checkbox" name="extraCurr" value="Jardinería">Jardinería  <img src="help.png" data-toggle="tooltip" title="Jardineria"><br>
+
+				<input type="checkbox" name="extraCurr" value="Papiroflexia">Papiroflexia  <img src="help.png" data-toggle="tooltip" title="Papiroflexia"><br>
+
+				<input type="checkbox" name="extraCurr" value="Ajedrez">Ajedrez  <img src="help.png" data-toggle="tooltip" title="Ajedrez"><br>
+
+				<input type="checkbox" name="extraCurr" value="Cultivo de hortalizas, Huerto escolar">Cultivo de hortalizas, Huerto escolar <img src="help.png" data-toggle="tooltip" title="Cultivo de hortalizas, Huerto escolar"><br>
+
+				<input type="checkbox" name="extraCurr" value="Arreglos florales">Arreglos florales  <img src="help.png" data-toggle="tooltip" title="Arreglos Florales"><br>
+
+				<input type="checkbox" name="extraCurr" value="Bordados y tejidos">Bordados y tejidos  <img src="help.png" data-toggle="tooltip" title="Bordados y Tejidos"><br>
+
+				<input type="checkbox" name="extraCurr" value="Danza">Danza  <img src="help.png" data-toggle="tooltip" title="Danza"><br>
+
+				<input type="checkbox" name="extraCurr" value="Formación de lectores">Formación de lectores  <img src="help.png" data-toggle="tooltip"" title="Formación de lectores"><br>
+
+				<input type="checkbox" name="extraCurr" value="Música">Música  <img src="help.png" data-toggle="tooltip" title="Música"><br>
+
+				<input type="checkbox" name="extraCurr" value="Acompañamiento académico para alumnos">Acompañamiento académico para alumnos <img src="help.png" data-toggle="tooltip" title="Acompañamiento académico para alumnos"><br>
+
+			</div>
+			<div class="filtrosDer">
+
+				<input type="checkbox" name="extraCurr" value="Pintura">Pintura  <img src="help.png" data-toggle="tooltip" title="Pintura"><br>
+
+				<input type="checkbox" name="extraCurr" value="Apoyo psicológico para alumnos">Apoyo psicológico para alumnos <img src="help.png" data-toggle="tooltip" title="Apoyo psicológico para alumnos"><br>
+
+				<input type="checkbox" name="extraCurr" value="Apoyo psicológico para padres de familia">Apoyo psicológico para padres de familia <img src="help.png" data-toggle="tooltip" title="Apoyo psicológico para padres de familia"><br>
+
+				<input type="checkbox" name="extraCurr" value="Acciones de convivencia escolar">Acciones de convivencia escolar <img src="help.png" data-toggle="tooltip" title="Acciones de convivencia escolar"><br>
+
+				<input type="checkbox" name="extraCurr" value="Pláticas de educación sexual">Pláticas de educación sexual  <img src="help.png" data-toggle="tooltip" title="Pláticas de educación sexual"><br>
+
+				<input type="checkbox" name="extraCurr" value="Escuela para padres">Escuela para padres  <img src="help.png" data-toggle="tooltip" title="Escuela para padres"><br>
+
+				<input type="checkbox" name="extraCurr" value="Muestras académicas para padres">Muestras académicas para padres <img src="help.png" data-toggle="tooltip" title="Muestras académicas para padres"><br>
+
+				<input type="checkbox" name="extraCurr" value="Transporte escolar">Transporte escolar  <img src="help.png" data-toggle="tooltip" title="Transporte escolar"><br>
+
+				<input type="checkbox" name="extraCurr" value="Desayunos económicos">Desayunos económicos  <img src="help.png" data-toggle="tooltip" title="Desayunos económicos"><br>
+
+				<input type="checkbox" name="extraCurr" value="Escoltas">Escoltas  <img src="help.png" data-toggle="tooltip" title="Escoltas"><br>
+
+				<input type="checkbox" name="extraCurr" value="Bandas de guerra">Bandas de guerra  <img src="help.png" data-toggle="tooltip" title="Bandas de guerra"><br>
+
+				<input type="checkbox" name="extraCurr" value="Dibujo artístico">Dibujo artístico  <img src="help.png" data-toggle="tooltip" title="Dibujo artístico"><br>
+
+				<input type="checkbox" name="extraCurr" value="Teatro">Teatro  <img src="help.png" data-toggle="tooltip" title="Teatro"><br>
+
+			</div>
+			<button onclick="filtrar('ofertaExtraCurr')">Filtrar</button>
+		</div>
+
+		<div id="ofertaListaTec" class="classInputFiltros">
+			<h4>Actividades Tecnologicas</h4>
+			<div class="filtrosIzq">
+
+				<input type="checkbox" name="tecno" value="Computación">Computación  <img src="help.png" data-toggle="tooltip" title="Computación"><br>
+
+				<input type="checkbox" name="tecno" value="Administración contable">Administración contable  <img src="help.png" data-toggle="tooltip" title="Administración contable"><br>
+
+				<input type="checkbox" name="tecno" value="Ofimática">Ofimática  <img src="help.png" data-toggle="tooltip" title="Ofimática"><br>
+
+				<input type="checkbox" name="tecno" value="Climatización y refrigeración">Climatización y refrigeración  <img src="help.png" data-toggle="tooltip" title="Climatización y refrigeración"><br>
+
+				<input type="checkbox" name="tecno" value="Carpintería e industria de la madera">Carpintería e industria de la madera <img src="help.png" data-toggle="tooltip" title="Carpintería e industria de la madera"><br>
+
+				<input type="checkbox" name="tecno" value="Diseño arquitectónico">Diseño arquitectónico <img src="help.png" data-toggle="tooltip" title="Diseño arquitectónico"><br>
+
+				<input type="checkbox" name="tecno" value="Diseño industrial">Diseño industrial  <img src="help.png" data-toggle="tooltip" title="Diseño industrial"><br>
+
+				<input type="checkbox" name="tecno" value="Diseño gráfico">Diseño gráfico  <img src="help.png" data-toggle="tooltip" title="Diseño gráfico"><br>
+
+				<input type="checkbox" name="tecno" value="Dibujo técnico">Dibujo técnico  <img src="help.png" data-toggle="tooltip" title="Dibujo técnico"><br>
+
+				<input type="checkbox" name="tecno" value="Ductos y controles">Ductos y controles  <img src="help.png" data-toggle="tooltip" title="Ductos y controles"><br>
+
+				<input type="checkbox" name="tecno" value="Diseño de circuitos electrónicos">Diseño de circuitos electrónicos  <img src="help.png" data-toggle="tooltip" title="Diseño de circuitos electrónicos"><br>
+
+				<input type="checkbox" name="tecno" value="Diseño de estructuras metálicas">Diseño de estructuras metálicas  <img src="help.png" data-toggle="tooltip" title="Diseño de estructuras metálicas"><br>
+
+			</div>
+			<div class="filtrosDer">
+
+				<input type="checkbox" name="tecno" value="Máquinas-herramienta y sistema de control">Máquinas-herramienta y sistema de control  <img src="help.png" data-toggle="tooltip" title="Máquinas-herramienta y sistema de control"><br>
+
+				<input type="checkbox" name="tecno" value="Confección del vestido e industria textil">Confección del vestido e industria textil  <img src="help.png" data-toggle="tooltip" title="Confección del vestido e industria textil"><br>
+
+				<input type="checkbox" name="tecno" value="Electrónica, comunicación y sistemas de control">Electrónica, comunicación y sistemas de control  <img src="help.png" data-toggle="tooltip" title="Electrónica, comunicación y sistemas de control"><br>
+
+				<input type="checkbox" name="tecno" value="Turismo">Turismo  <img src="help.png" data-toggle="tooltip" title="Turismo"><br>
+
+				<input type="checkbox" name="tecno" value="Atención hotelera">Atención hotelera  <img src="help.png" data-toggle="tooltip" title="Atención hotelera"><br>
+
+				<input type="checkbox" name="tecno" value="Acuicultura">Acuicultura  <img src="help.png" data-toggle="tooltip" title="Acuicultura"><br>
+
+				<input type="checkbox" name="tecno" value="Agricultura">Agricultura  <img src="help.png" data-toggle="tooltip" title="Agricultura"><br>
+
+				<input type="checkbox" name="tecno" value="Apicultura">Apicultura  <img src="help.png" data-toggle="tooltip" title="Apicultura"><br>
+
+				<input type="checkbox" name="tecno" value="Preparación y conserva de alimentos">Preparación y conserva de alimentos <img src="help.png" data-toggle="tooltip" title="Preparación y conserva de alimentos"><br>
+
+				<input type="checkbox" name="tecno" value="Pecuarias">Pecuarias  <img src="help.png" data-toggle="tooltip" title="Pecuarias"><br>
+
+				<input type="checkbox" name="tecno" value="Silvicultura">Silvicultura  <img src="help.png" data-toggle="tooltip" title="Silvicultura"><br>
+
+			</div>
+			<button onclick="filtrar('ofertaTecno')">Filtrar</button>
+		</div>
+
+		<div id="programas" class="classInputFiltros">
+			<h4>Programas</h4>
+			<div class="filtrosIzq">
+
+				<input type="checkbox" name="programas" value="Apoyo USAER">Apoyo USAER  <img src="help.png" data-toggle="tooltip" title="Apoyo USAER"><br>
+
+				<input type="checkbox" name="programas" value="Ver bien para aprender mejor">Ver bien para aprender mejor  <img src="help.png" data-toggle="tooltip" title="Ver bien para aprender mejor"><br>
+
+				<input type="checkbox" name="programas" value="Desayunos en caliente">Desayunos en caliente  <img src="help.png" data-toggle="tooltip" title="Desayunos en caliente"><br>
+
+				<input type="checkbox" name="programas" value="Convivencia escolar">Convivencia escolar  <img src="help.png" data-toggle="tooltip" title="Convivencia escolar"><br>
+
+				<input type="checkbox" name="programas" value="Becas PROSPERA">Becas PROSPERA  <img src="help.png" data-toggle="tooltip" title="Becas PROSPERA"><br>
+
+				<input type="checkbox" name="programas" value="Apoyo contra las adicciones">Apoyo contra las adicciones  <img src="help.png" data-toggle="tooltip" title="Apoyo contra las adicciones"><br>
+
+				<input type="checkbox" name="programas" value="Becas PROMAJOVEN">Becas PROMAJOVEN   <img src="help.png" data-toggle="tooltip" title="Becas PROMAJOVEN"><br>
+
+			</div>
+			<div class="filtrosDer">
+				<input type="checkbox" name="programas" value="Desayunos en frío">Desayunos en frío  <img src="help.png" data-toggle="tooltip" title="Desayunos en frío"><br>
+
+				<input type="checkbox" name="programas" value="Equipamiento y mantenimiento de infraestructura (Escuelas al 100)">Equipamiento y mantenimiento de infraestructura  <img src="help.png" data-toggle="tooltip" title="Equipamiento y mantenimiento de infraestructura (Escuelas al 100)"><br>
+
+				<input type="checkbox" name="programas" value="Escuelas de tiempo completo">Escuelas de tiempo completo   <img src="help.png" data-toggle="tooltip" title="Escuelas de tiempo completo"><br>
+
+				<input type="checkbox" name="programas" value="Transporte escolar">Transporte escolar gratuito <img src="help.png" data-toggle="tooltip" title="Transporte escolar"><br>
+
+				<input type="checkbox" name="programas" value="Becas oficiales (académicas)">Becas oficiales (académicas)  <img src="help.png" data-toggle="tooltip" title="Becas oficiales (académicas)"><br>
+
+
+			</div>
+			<button onclick="filtrar('programas')">Filtrar</button>
+		</div>
+
+		<div id="infraestructura" class="classInputFiltros">
+			<h4>Infraestructura</h4>
+			<div class="filtrosIzq">
+
+				<input type="checkbox" name="infra" value="Cancha de fútbol">Cancha de fútbol  <img src="help.png" data-toggle="tooltip" title="Cancha de fútbol"><br>
+
+				<input type="checkbox" name="infra" value="Cancha de fútbol rápido">Cancha de fútbol rápido  <img src="help.png" data-toggle="tooltip" title="Cancha de fútbol rápido"><br>
+
+				<input type="checkbox" name="infra" value="Cafetería">Cafetería  <img src="help.png" data-toggle="tooltip" title="Cafetería"><br>
+
+				<input type="checkbox" name="infra" value="Aula de medios ">Aula de medios  <img src="help.png" data-toggle="tooltip" title="Aula de medios"><br>
+
+				<input type="checkbox" name="infra" value="Auditorio">Auditorio  <img src="help.png" data-toggle="tooltip" title="Auditorio"><br>
+
+			</div>
+			<div class="filtrosDer">
+
+				<input type="checkbox" name="infra" value="Cancha de basquetbol, voleibol">Cancha de basquetbol, voleibol  <img src="help.png" data-toggle="tooltip" title="Cancha de basquetbol, voleibol"><br>
+
+				<input type="checkbox" name="infra" value="Plaza cívica">Plaza cívica  <img src="help.png" data-toggle="tooltip" title="Plaza cívica"><br>
+
+				<input type="checkbox" name="infra" value="Laboratorios">Laboratorios  <img src="help.png" data-toggle="tooltip" title="Laboratorios"><br>
+
+				<input type="checkbox" name="infra" value="Biblioteca">Biblioteca  <img src="help.png" data-toggle="tooltip" title="Biblioteca"><br>
+
+				<input type="checkbox" name="infra" value="Arcotecho">Arcotecho  <img src="help.png" data-toggle="tooltip" title="Arcotecho"><br>
+
+			</div>
+			<button onclick="filtrar('infraestructura')">Filtrar</button>
+		</div>
+	</div>
+
+<section>
+
+	<div class="opciones">
+		<div class="opc" id="o1">
+			<!--<h1 id="nombreEscuela">OPCIÓN 1</h1>
+			<img src="pin.png" onclick="ver(2)" id="p1">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+			<table >
+				<tr>
+					<th colspan="2">Actividades Tecnologíacas</th>
+				</tr>
+				<tr>
+					<td>Administrativas e Informáticas</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Industria y Construcción</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Preparación de alimentos y Actividades Agropecuarias</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Turismo</td>
+					<td>Texto  1 <br>Texto 2 <br>Texto 3</td>
+				</tr>
+				<tr>
+				<th colspan="2">Programas en la Escuela</th>
+				</tr>
+				<tr>
+					<td>Programas</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<th colspan="2">Infraestructura Destacable</th>
+				</tr>
+				<tr>
+					
+					<td>Programa</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+			</table>-->
+		</div>
+
+		<div class="opc" id="o2">
+			<!--<h1>OPCIÓN 2</h1>
+			<img src="pin.png" onclick="ver(3)" id="p2">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+			<table >
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1 <br>Texto 2 <br>Texto 3</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+			</table>-->
+		</div>
+		<div class="opc" id="o3">
+			<!--<h1>OPCIÓN 3</h1>
+			<img src="pin.png" id="p3">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+			<table id="tablao3">
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1 <br>Texto 2 <br>Texto 3</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+				<tr>
+					<td>Característica 1</td>
+					<td>Texto  1</td>
+				</tr>
+			</table>-->
+		</div>
+
+		<div class="opc" id="o4">
+			<button onclick="comparar()">Comparar</button>
+		</div>
+		
+
+	</div>
+	<div id="map"></div>
+	
+</section>
+
+
+
+
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0doC63g2cST4XW1vJDJBmKaB8hWBbfUk&callback=initMap&libraries=geometry&libraries=places">
+    </script>
+
+</body>
+</html>
